@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Student Assessment Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + TypeScript application that provides an interface for instructors to create, edit, and manage student exams. The system is built to replicate the provided Figma design with responsive layouts, form validation, and state persistence.  
 
-Currently, two official plugins are available:
+Deployed URL: **[Add your deployed link here]**  
+GitHub Repository: **[https://github.com/Osebest/Lightbraincm/tree/main]**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project implements a **Student Assessment Management System** where instructors can:  
 
-## Expanding the ESLint configuration
+- Create and edit exams via a modal form.  
+- View exam cards in a responsive dashboard layout.  
+- Search and filter exams by title, date, and course.  
+- Perform CRUD operations on exams with local persistence.  
+- Export exam data in CSV/Excel format.  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The UI closely follows the provided Figma design/image and ensures a clean, accessible, and responsive user experience.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 1. Create/Edit Exam Modal
+- **Form Fields**:  
+  - Exam Title (text input)  
+  - Exam Description (textarea)  
+  - Date (date picker/dropdown)  
+  - Course (dropdown)  
+  - Maximum Point (number input)  
+  - Weighted (percentage input)  
+  - Passing Threshold (number input)  
+  - Visibility toggle (Yes/No radio buttons)  
+- **Validation**: Implemented using `react-hook-form` and `yup`.  
+- **Functionality**: Create new exams, edit existing ones, cancel, or close modal.  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Assessment Dashboard
+- **Layout**:  
+  - Left sidebar with collapsible menu.  
+  - Top navigation with search, date filter, and course dropdown filter.  
+  - Responsive grid of exam cards.  
+- **Exam Cards**:  
+  - Show exam title, year, dates, weight, and status.  
+  - Action buttons: **Grade/View**, **Edit**, **Delete**.  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 3. Interactive Elements
+- Search exams by title or course.  
+- Filter exams by **date** and **course**.  
+- Create new exams.  
+- Export data to **CSV** or **Excel**.  
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🛠️ Technical Stack
+
+- **Frontend**: React, TypeScript, TailwindCSS, ChakraUI 
+- **State Management**: Zustand (with persistence in LocalStorage)  
+- **Form Handling**: React Hook Form + Yup for validation  
+- **Export**: XLSX + FileSaver.js  
+- **Icons**: React Icons  
+- **Persistence**: LocalStorage (persisted state with Zustand middleware)  
+
+---
+
+
+## ⚙️ Setup Instructions
+
+### Prerequisites
+- Node.js >= 18
+- npm or yarn
+
+### Installation and Development
+```bash
+git clone <repo-url>
+cd <repo-folder>
+npm <install>
+
+npm run dev
+
+npm run build

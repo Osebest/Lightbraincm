@@ -38,10 +38,10 @@ const ModalPop = ({
       >
         <ModalOverlay backdropFilter="blur(10px)" />
         <ModalContent
-          className={`${className} dark:bg-navy-900 dark:text-white`}
+          className={`${className} dark:!bg-[#373737] !rounded-[20px] p-4`}
         >
           <ModalHeader className="capitalize">{title}</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton className="!m-6" />
           <ModalBody>{children}</ModalBody>
         </ModalContent>
       </Modal>

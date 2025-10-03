@@ -1,0 +1,7 @@
+.button,
+.label {
+  svg {
+    font-size: inherit;
+    color: inherit;
+  }
+}
