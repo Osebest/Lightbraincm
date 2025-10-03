@@ -9,5 +9,5 @@
 }
 
 body {
-  @apply bg-gray-100 dark:!bg-[#121212] text-black dark:!text-gray-100;
+  @apply !bg-[#fcf6f0] dark:!bg-[#121212] text-black dark:!text-gray-100 transition-all duration-300;
 }

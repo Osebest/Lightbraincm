@@ -32,26 +32,30 @@ const TextField: React.FC<TextFieldProps> = ({
     <div className={`${className ?? ""} relative space-y-1 w-full`}>
       <label
         htmlFor={id ?? register?.name ?? name}
-        className={`text-base text-primary dark:text-white ml-3 font-medium inline-flex gap-2 items-center ${
+        className={`text-base text-[#4c4c4d] dark:text-white font-medium inline-flex gap-2 items-center ${
           labelClassName ? labelClassName : ""
         }`}
       >
         <span>{label}</span>
-        {caption && (
-          <span className="text-gray-500 text-xs font-medium">{`(${caption})`}</span>
-        )}
       </label>
       <div>
         <textarea
+          aria-label="text-field"
+          aria-labelledby="label"
+          id={id ?? register?.name ?? name}
           onChange={onChange}
           placeholder={placeholder}
-          className={`flex h-36 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${
-            disabled === true
+          className={`flex h-36 w-full items-center justify-center rounded-xl !border-[1.5px] !bg-[#eee8e3] dark:!bg-transparent !p-3 text-sm outline-none ${
+            disabled
               ? "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]"
               : error
-              ? "border-state-error text-state-error placeholder:text-state-error"
-              : "focus:border-primary-40 placeholder:text-primary-40 border-gray-200 text-primary dark:!border-white/10 dark:text-white"
+              ? "border-red-500 text-red-500 placeholder:text-red-500"
+              : "!border-[#4c4c4d] dark:!border-white/10"
           } ${inputClassName ?? ""}`}
+          aria-errormessage={
+            error ? `error-${id ?? register?.name}` : undefined
+          }
+          aria-invalid={error ? "true" : "false"}
           name={name}
           disabled={disabled}
           {...register}
@@ -59,7 +63,7 @@ const TextField: React.FC<TextFieldProps> = ({
         />
         <span
           id={`error-${id ?? register?.name ?? name}`}
-          className=" text-state-error text-xs h-1 w-full inline-block"
+          className=" text-red-500 text-xs h-1 w-full inline-block"
         >
           {error ?? ""}
         </span>
