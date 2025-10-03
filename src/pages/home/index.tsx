@@ -1,6 +1,6 @@
 import Button from "../../components/Button";
 import CreateEditModal from "./components/CreateEditModal";
-import { LuFilePlus2, LuSearch } from "react-icons/lu";
+import { LuFilePlus2, LuFilter, LuSearch } from "react-icons/lu";
 import { PiExportBold } from "react-icons/pi";
 import { useState } from "react";
 import ExamCard from "./components/ExamCard";
@@ -71,7 +71,7 @@ const HomePage = () => {
         >
           {collapsed ? <RiExpandRightLine /> : <RiExpandLeftLine />}
         </button>
-        <div className="flex items-center w-full gap-3 max-w-6xl">
+        <div className="hidden md:flex items-center w-full gap-3 max-w-6xl">
           <div className="flex flex-1 gap-2 items-center h-12 !bg-[#f3ebe4] dark:!bg-[#373737] !p-3 text-sm rounded-3xl">
             <LuSearch />
             <input
@@ -123,24 +123,92 @@ const HomePage = () => {
             </ul>
           </Dropdown>
         </div>
-        <Dropdown
-          // User Avatar
-          button={
-            <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer text-black">
-              LB
-            </div>
-          }
-          classNames="right-20"
-        >
-          <div className="bg-white dark:bg-[#373737] shadow-lg rounded-lg p-4 min-w-max">
-            <button
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="w-full text-left px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-navy-800"
+        <div className="flex gap-2 items-center">
+          <div className="md:!hidden">
+            <Dropdown
+              button={
+                <div className="flex gap-2 items-center justify-between h-12 !bg-[#f3ebe4] dark:!bg-[#373737] !p-3 text-sm rounded-3xl cursor-pointer min-w-[200px]">
+                  <span>{filterCourse || "Select Course"}</span>
+                  <span className="text-xs">▼</span>
+                </div>
+              }
+              classNames="bg-white dark:bg-[#373737] rounded-xl shadow-lg p-2"
+              parentClassName="min-w-[200px]"
             >
-              {theme === "light" ? "Dark" : "Light"} Mode
-            </button>
+              <ul className="max-h-48 overflow-y-auto">
+                {courseList.map((c) => (
+                  <li
+                    key={c.id}
+                    onClick={() => setFilterCourse(c.name)}
+                    className="px-3 py-2 cursor-pointer rounded"
+                  >
+                    {c.name}
+                  </li>
+                ))}
+                <li
+                  onClick={() => setFilterCourse("")}
+                  className="px-3 py-2 cursor-pointer rounded text-red-500"
+                >
+                  Clear
+                </li>
+              </ul>
+            </Dropdown>
           </div>
-        </Dropdown>
+          <Dropdown
+            button={
+              <button className="md:hidden w-10 h-10 rounded-full bg-[#f3ebe4] dark:bg-[#373737] flex items-center justify-center">
+                <LuFilter />
+              </button>
+            }
+            classNames="right-0 mt-1 bg-white dark:!bg-[#373737] rounded-xl shadow !p-4 !min-w-[250px] overflow-clip"
+          >
+            <div className="space-y-3 overflow-clip">
+              {/* Search */}
+              <div className="flex gap-1 items-center h-10 !bg-[#f3ebe4] dark:!bg-[#373737] !p-2 text-xs rounded-2xl">
+                <LuSearch />
+                <input
+                  type="text"
+                  aria-label="Search Exams"
+                  aria-labelledby="label"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by title, course code..."
+                  className="flex-1 bg-transparent outline-none *:placeholder:text-sm "
+                />
+              </div>
+
+              {/* Date */}
+              <div className="flex gap-1 items-center h-10 !bg-[#f3ebe4] dark:!bg-[#373737] !p-2 text-xs rounded-2xl">
+                <input
+                  type="date"
+                  aria-label="Filter by Due Date"
+                  aria-labelledby="label"
+                  value={filterDate}
+                  onChange={(e) => setFilterDate(e.target.value)}
+                  className="flex-1 bg-transparent outline-none *:placeholder:text-sm "
+                />
+              </div>
+            </div>
+          </Dropdown>
+          <Dropdown
+            // User Avatar
+            button={
+              <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer text-black">
+                LB
+              </div>
+            }
+            classNames="right-20"
+          >
+            <div className="bg-white dark:bg-[#373737] shadow-lg rounded-lg p-4 min-w-max">
+              <button
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="w-full text-left px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-navy-800"
+              >
+                {theme === "light" ? "Dark" : "Light"} Mode
+              </button>
+            </div>
+          </Dropdown>
+        </div>
       </header>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 mb-20 mx-auto max-w-6xl">
         {filteredExams.map((e) => (
