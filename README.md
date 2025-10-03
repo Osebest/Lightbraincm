@@ -2,7 +2,7 @@
 
 A React + TypeScript application that provides an interface for instructors to create, edit, and manage student exams. The system is built to replicate the provided Figma design with responsive layouts, form validation, and state persistence.  
 
-Deployed URL: **[Add your deployed link here]**  
+Deployed URL: **[https://lightbraincm.netlify.app/]**  
 GitHub Repository: **[https://github.com/Osebest/Lightbraincm/tree/main]**
 
 ---
